@@ -21,4 +21,3 @@ DOCTOR_DATA = {
     ]
 }
 
-ADMIN_PASSWORD = "doctor@123" # Ise baad mein badal sakte hain
