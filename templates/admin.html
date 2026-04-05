@@ -7,27 +7,32 @@
                 <th>Patient Name</th>
                 <th>Phone</th>
                 <th>Date</th>
-                 <th>age</th>
                 <th>Message</th>
+                <th>age</th>
                 <th>status</th>
                 <th>Action</th>              
             </tr>
         </thead>
         <tbody>
            {% for appt in data %}
-<tr>
-    <td>{{ appt[0] }}</td> <td>{{ appt[1] }}</td> <td>{{ appt[2] }}</td> <td>
-        <span class="status-badge {{ appt[5]|lower }}">
-            {{ appt[5] }}
-        </span>
-    </td>
-    
-    <td>
-        {% if appt[5] == 'Pending' %}
-            <a href="/approve/{{ appt[0] }}" class="btn-approve">✔️ Approve</a>
-        {% elif appt[5] == 'Approved' %}
-            <a href="/complete/{{ appt[0] }}" class="btn-complete">🩺 Complete</a>
-        {% endif %}
+            <tr>
+                <td>{{ appt[0] }}</td> <td>{{ appt[1] }}</td> <td>{{ appt[2] }}</td> <td>{{ appt[3] }}</td> <td>{{ appt[4] }}</td> <td>{{ appt[6] if appt[6] else 'N/A' }}</td> <td>
+                    <span class="status-badge {{ appt[5]|lower }}">
+                        {{ appt[5] }}
+                    </span>
+                </td>
+                
+                <td>
+                    {% if appt[5] == 'Pending' %}
+                        <a href="/approve/{{ appt[0] }}" style="color: #00b894; text-decoration: none; margin-right: 10px;">✔️ Approve</a>
+                    {% elif appt[5] == 'Approved' %}
+                        <a href="/complete/{{ appt[0] }}" style="color: #0984e3; text-decoration: none; margin-right: 10px;">🩺 Complete</a>
+                    {% endif %}
+                    
+                    <a href="/delete/{{ appt[0] }}" onclick="return confirm('Mita dein?')" style="color: #d63031; text-decoration: none;">❌ Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
         
         <a href="/delete/{{ appt[0] }}" onclick="return confirm('Mita dein?')" class="btn-delete">❌ Delete</a>
     </td>
