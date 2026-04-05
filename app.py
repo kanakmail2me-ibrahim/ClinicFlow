@@ -66,7 +66,8 @@ def admin_dashboard():
     conn = get_db_connection()
     cur = conn.cursor()
     # Saare appointments ko naye se purane (DESC) order mein mangwao
-    cur.execute("SELECT id, patient_name, phone, appt_date, message, status, age FROM appointments ORDER BY id DESC")    appointments = cur.fetchall()
+    cur.execute("SELECT id, patient_name, phone, appt_date, message, status, age FROM appointments ORDER BY id DESC")    
+    appointments = cur.fetchall()
     cur.close()
     conn.close()
     
