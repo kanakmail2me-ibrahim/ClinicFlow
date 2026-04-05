@@ -18,21 +18,22 @@ app.secret_key = "secret_clinic_key" # Session ko secure karne ke liye
 def home():
     return render_template("index.html", data=DOCTOR_DATA)
 
-# Ye naya route hai data save karne ke liye
 @app.route("/book", methods=["POST"])
 def book_appointment():
-    # Form se data nikalna
     name = request.form.get("name")
     phone = request.form.get("phone")
-    age = request.form.get("age") # Yeh sahi tha
+    age = request.form.get("age")
     date = request.form.get("date")
     msg = request.form.get("message")
     
-    # DATABASE QUERY UPDATE: Humne 'age' column joda aur ek extra '%s' lagaya
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute("INSERT INTO appointments (patient_name, phone, appt_date, message, age) VALUES (%s, %s, %s, %s, %s)",
-                (name, phone, date, msg, age)) # Yahan aakhiri mein 'age' bhej diya!
+    
+    # Humne columns ko saaf-saaf bata diya aur age ko Integer (int) mein convert kar diya
+    cur.execute(
+        "INSERT INTO appointments (patient_name, phone, appt_date, message, age, status) VALUES (%s, %s, %s, %s, %s, %s)",
+        (name, phone, date, msg, int(age) if age else None, 'Pending')
+    )
     
     conn.commit()
     cur.close()
