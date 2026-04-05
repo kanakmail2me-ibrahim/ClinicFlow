@@ -164,3 +164,20 @@ body { color: var(--text-color); line-height: 1.6; }
 .appointment-form button:hover {
     background: var(--primary-color); /* Hover karne par dark color */
 }
+
+/* Badges Style */
+.status-badge {
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.status-badge.pending { background-color: #ffeaa7; color: #d63031; } /* Yellow */
+.status-badge.approved { background-color: #55efc4; color: #00b894; } /* Green */
+.status-badge.completed { background-color: #dfe6e9; color: #636e72; } /* Grey */
+
+/* Action Buttons */
+.btn-approve { color: #00b894; text-decoration: none; margin-right: 10px; }
+.btn-complete { color: #0984e3; text-decoration: none; margin-right: 10px; }
+.btn-delete { color: #d63031; text-decoration: none; }
