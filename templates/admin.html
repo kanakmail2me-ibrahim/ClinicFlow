@@ -12,18 +12,25 @@
             </tr>
         </thead>
         <tbody>
-            {% for appt in data %}
-            <tr>
-                <td>{{ appt[0] }}</td>
-                <td>{{ appt[1] }}</td>
-                <td>{{ appt[2] }}</td>
-                <td>{{ appt[3] }}</td>
-                <td>{{ appt[4] }}</td>
-                <td>
-                    <a href="/delete/{{ appt[0] }}" onclick="return confirm('Mita dein?')" style="color:red;">❌ Delete</a>
-                </td>
-            </tr>
-            {% endfor %}
+           {% for appt in data %}
+<tr>
+    <td>{{ appt[0] }}</td> <td>{{ appt[1] }}</td> <td>{{ appt[2] }}</td> <td>
+        <span class="status-badge {{ appt[5]|lower }}">
+            {{ appt[5] }}
+        </span>
+    </td>
+    
+    <td>
+        {% if appt[5] == 'Pending' %}
+            <a href="/approve/{{ appt[0] }}" class="btn-approve">✔️ Approve</a>
+        {% elif appt[5] == 'Approved' %}
+            <a href="/complete/{{ appt[0] }}" class="btn-complete">🩺 Complete</a>
+        {% endif %}
+        
+        <a href="/delete/{{ appt[0] }}" onclick="return confirm('Mita dein?')" class="btn-delete">❌ Delete</a>
+    </td>
+</tr>
+{% endfor %}
         </tbody>
     </table>
 </div>
