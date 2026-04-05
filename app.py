@@ -84,5 +84,34 @@ def delete_appointment(id):
     conn.close()
     return redirect(url_for('admin_dashboard'))
 
+# Status ko Approved karne ka rasta
+@app.route("/approve/<int:id>")
+def approve_appointment(id):
+    if not session.get('logged_in'): 
+        return redirect(url_for('login'))
+    
+    conn = get_db_connection()
+    cur = conn.cursor()
+    # SQL UPDATE command: Isse hum purane data ko badalte hain
+    cur.execute("UPDATE appointments SET status = 'Approved' WHERE id = %s", (id,))
+    conn.commit()
+    cur.close()
+    conn.close()
+    return redirect(url_for('admin_dashboard'))
+
+# Status ko Completed karne ka rasta
+@app.route("/complete/<int:id>")
+def complete_appointment(id):
+    if not session.get('logged_in'): 
+        return redirect(url_for('login'))
+    
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute("UPDATE appointments SET status = 'Completed' WHERE id = %s", (id,))
+    conn.commit()
+    cur.close()
+    conn.close()
+    return redirect(url_for('admin_dashboard'))
+
 if __name__ == "__main__":
     app.run(debug=True)
