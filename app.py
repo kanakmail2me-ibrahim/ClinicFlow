@@ -22,9 +22,9 @@ def home():
 def book_appointment():
     name = request.form.get("name")
     phone = request.form.get("phone")
-    age = request.form.get("age")
     date = request.form.get("date")
     msg = request.form.get("message")
+    age = request.form.get("age")
     
     conn = get_db_connection()
     cur = conn.cursor()
